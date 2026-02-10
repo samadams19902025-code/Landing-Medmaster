@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedMaster - Master Medical Terminology in 10 Minutes Daily</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a3a52;
+            background: #f8fbfd;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0a4d68 0%, #088395 50%, #05BFDB 100%);
+            color: white;
+            padding: 80px 20px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,122.7C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero .subtitle {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+        
+        .hero .highlight {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 10px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        /* Stats Bar */
+        .stats {
+            background: white;
+            padding: 40px 20px;
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.08);
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stats-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #088395;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #5a7184;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        /* Problem Section */
+        .problem {
+            background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+            padding: 80px 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0a4d68;
+        }
+        
+        .section-subtitle {
+            font-size: 20px;
+            text-align: center;
+            color: #5a7184;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .problem-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .problem-item {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            border-left: 5px solid #ef4444;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .problem-item h3 {
+            font-size: 22px;
+            color: #ef4444;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .problem-item p {
+            color: #5a7184;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        /* Solution Section */
+        .solution {
+            background: white;
+            padding: 80px 20px;
+        }
+        
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+        
+        .solution-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #088395;
+            transition: all 0.3s ease;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(8, 131, 149, 0.15);
+        }
+        
+        .solution-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        
+        .solution-card h3 {
+            font-size: 24px;
+            color: #0a4d68;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .solution-card p {
+            color: #5a7184;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+            padding: 80px 20px;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #088395 0%, #05BFDB 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 800;
+            margin: 0 auto 25px;
+            box-shadow: 0 8px 20px rgba(8, 131, 149, 0.3);
+        }
+        
+        .step h3 {
+            font-size: 22px;
+            color: #0a4d68;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .step p {
+            color: #5a7184;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        /* Pricing */
+        .pricing {
+            background: white;
+            padding: 80px 20px;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 50px auto 0;
+        }
+        
+        .pricing-card {
+            background: white;
+            border: 3px solid #e5e7eb;
+            border-radius: 25px;
+            padding: 50px 35px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(8, 131, 149, 0.15);
+        }
+        
+        .pricing-card.featured {
+            border-color: #088395;
+            border-width: 4px;
+            box-shadow: 0 10px 40px rgba(8, 131, 149, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #088395 0%, #05BFDB 100%);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        
+        .plan-name {
+            font-size: 28px;
+            color: #0a4d68;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .plan-price {
+            font-size: 56px;
+            font-weight: 800;
+            color: #088395;
+            margin: 20px 0;
+        }
+        
+        .plan-price span {
+            font-size: 22px;
+            color: #5a7184;
+            font-weight: 400;
+        }
+        
+        .plan-savings {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin: 30px 0;
+            padding: 0;
+        }
+        
+        .plan-features li {
+            padding: 12px 0;
+            color: #5a7184;
+            font-size: 16px;
+            position: relative;
+            padding-left: 35px;
+        }
+        
+        .plan-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 900;
+            font-size: 20px;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #088395 0%, #05BFDB 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(8, 131, 149, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(8, 131, 149, 0.4);
+        }
+        
+        /* Guarantee */
+        .guarantee {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        .guarantee-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .guarantee h3 {
+            font-size: 32px;
+            color: #0a4d68;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .guarantee p {
+            font-size: 18px;
+            color: #5a7184;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #0a4d68;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .footer p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero .subtitle {
+                font-size: 20px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Master Medical Terminology in Just 10 Minutes Daily</h1>
+            <p class="subtitle">Stop forgetting what you studied. Start retaining medical terms for life.</p>
+            <div class="highlight">🎯 Science-Backed Spaced Repetition • Visual Learning • Smart AI</div>
+        </div>
+    </div>
+    
+    <!-- Stats Bar -->
+    <div class="stats">
+        <div class="stats-container">
+            <div class="stat">
+                <span class="stat-number">10min</span>
+                <span class="stat-label">Daily Study Time</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">5,000+</span>
+                <span class="stat-label">Medical Terms</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">95%</span>
+                <span class="stat-label">Retention Rate</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Problem Section -->
+    <div class="problem">
+        <div class="container">
+            <h2 class="section-title">The Problem Every Medical Student Faces</h2>
+            <p class="section-subtitle">You're drowning in information. Cramming doesn't work. You forget what you studied last week.</p>
+            
+            <div class="problem-list">
+                <div class="problem-item">
+                    <h3>❌ Information Overload</h3>
+                    <p>Thousands of medical terms, anatomical structures, roots, and prefixes. Your brain can't keep up with traditional study methods.</p>
+                </div>
+                <div class="problem-item">
+                    <h3>❌ Wasted Study Time</h3>
+                    <p>You spend hours reviewing terms you already know while neglecting the ones you're about to forget. Zero efficiency.</p>
+                </div>
+                <div class="problem-item">
+                    <h3>❌ No Visual Connection</h3>
+                    <p>Reading text alone doesn't work. You need to SEE organs, anatomical structures, and medical concepts to truly remember them.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Solution Section -->
+    <div class="solution">
+        <div class="container">
+            <h2 class="section-title">The Solution: Smart Flashcards That Adapt to YOU</h2>
+            <p class="section-subtitle">MedMaster uses proven spaced repetition technology to ensure you never forget what you learn</p>
+            
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div class="solution-icon">🧠</div>
+                    <h3>AI-Powered Repetition</h3>
+                    <p>Our algorithm tracks what you know and what you're forgetting. Terms you struggle with? You'll see them more often. Terms you've mastered? Less frequent reviews.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon">👁️</div>
+                    <h3>Visual Learning</h3>
+                    <p>Every medical term comes with high-quality visual representations. See the organ, the structure, the root in action. Your brain remembers images 6x better than text.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon">⚡</div>
+                    <h3>10 Minutes Daily</h3>
+                    <p>No more 4-hour study marathons. Just 10 focused minutes per day. Consistency beats cramming every single time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- How It Works -->
+    <div class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Science-backed learning in 4 simple steps</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>See the Flashcard</h3>
+                    <p>Medical term + visual representation. Anatomy, organs, roots, prefixes - all visually displayed.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Mark Your Knowledge</h3>
+                    <p>Know it? Mark it. Don't know it? Mark it. The AI tracks your confidence level on every single card.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Smart Scheduling</h3>
+                    <p>Our algorithm calculates the EXACT moment you're about to forget a term and shows it to you again. Spaced repetition at its finest.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Retain for Life</h3>
+                    <p>After just a few reviews over weeks, the information moves to your long-term memory. Forever.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pricing -->
+    <div class="pricing">
+        <div class="container">
+            <h2 class="section-title">Start Mastering Medical Terms Today</h2>
+            <p class="section-subtitle">Choose the plan that fits your study schedule</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Monthly Plan</div>
+                    <div class="plan-price">$5<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li>5,000+ medical flashcards</li>
+                        <li>Visual learning with images</li>
+                        <li>AI spaced repetition algorithm</li>
+                        <li>Track your progress daily</li>
+                        <li>Study on any device</li>
+                        <li>Cancel anytime</li>
+                    </ul>
+                    <button class="cta-button" onclick="window.location.href='https://tally.so/r/YOUR_FORM_ID'">
+                        Get Started Now
+                    </button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="plan-name">Yearly Plan</div>
+                    <div class="plan-savings">Save 80% - Only $1/month!</div>
+                    <div class="plan-price">$12<span>/year</span></div>
+                    <ul class="plan-features">
+                        <li>Everything in Monthly Plan</li>
+                        <li>Lock in this price forever</li>
+                        <li>Priority email support</li>
+                        <li>Early access to new features</li>
+                        <li>Downloadable study guides</li>
+                        <li>Best value for serious students</li>
+                    </ul>
+                    <button class="cta-button" onclick="window.location.href='https://tally.so/r/YOUR_FORM_ID'">
+                        Get Started Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Guarantee -->
+    <div class="guarantee">
+        <div class="guarantee-content">
+            <h3>🛡️ 30-Day Money-Back Guarantee</h3>
+            <p>Try MedMaster risk-free for 30 days. If you don't see a dramatic improvement in your retention, we'll refund every penny. No questions asked.</p>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2026 MedMaster • Secure Payment Processing • Cancel Anytime</p>
+    </div>
+</body>
+</html>
